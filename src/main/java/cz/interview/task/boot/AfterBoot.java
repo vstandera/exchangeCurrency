@@ -69,15 +69,11 @@ public class AfterBoot {
             System.out.println("Reading file using Buffered Reader");
 
             while ((readLine = b.readLine()) != null) {
-//                System.out.println(readLine);
                 String[] split = readLine.split("\\|");
                 BigDecimal exchangeRate = new BigDecimal(split[1].replaceAll(",", "."));
-//                System.out.println("-------"+exchangeRate);
                 BigDecimal bigDecimal = new BigDecimal("1");
-//                System.out.println("-------"+exchangeRate);
                 Date exchangeDate = new SimpleDateFormat("dd.MM.yyyy").parse(split[0]);
                 BigDecimal bigDecimal2 = bigDecimal.divide(exchangeRate, mc);
-//                System.out.println("-------"+exchangeDate.toString());
                 System.out.println(split[0]+"|"+bigDecimal2.toString());
                 currencyExchangeRepository.save(CurrencyExchange.builder().exchangeDate(exchangeDate).currencyTo(currencyTo)
                         .currencyFrom(currencyFrom).exchangeRate(exchangeRate).build());
@@ -86,7 +82,6 @@ public class AfterBoot {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-//        CurrencyExchange.builder().currencyFrom(currencyFrom).currencyTo(currencyTo).exchangeDate()
     }
 
     private void saveCurrencyExchangeDifferentCurrency(Currency currencyFrom, Currency currencyTo){
@@ -101,7 +96,6 @@ public class AfterBoot {
             System.out.println("Reading file using Buffered Reader");
             String readLine2="";
             while ((readLine = b.readLine()) != null) {
-//                System.out.println(readLine);
                 readLine2 = b2.readLine();
                 String[] split = readLine.split("\\|");
                 String[] split2 = readLine2.split("\\|");
@@ -109,7 +103,6 @@ public class AfterBoot {
                 BigDecimal exchangeRate2 = new BigDecimal(split2[1].replaceAll(",", "."));
                 Date exchangeDate = new SimpleDateFormat("dd.MM.yyyy").parse(split[0]);
                 BigDecimal bigDecimal2 = exchangeRate.divide(exchangeRate2, mc);
-//                System.out.println("-------"+exchangeDate.toString());
                 System.out.println(split[0]+"|"+bigDecimal2.toString());
                 currencyExchangeRepository.save(CurrencyExchange.builder().exchangeDate(exchangeDate).currencyTo(currencyTo)
                         .currencyFrom(currencyFrom).exchangeRate(exchangeRate).build());
