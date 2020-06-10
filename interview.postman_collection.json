@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "abd709f9-3173-4012-9866-13fd999adb24",
+		"name": "interview",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getExchangeCurrency",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "calculate Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
