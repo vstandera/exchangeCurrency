@@ -17,7 +17,18 @@
 			"response": []
 		},
 		{
-			"name": "calculate Copy",
+			"name": "calculate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allCalculatedAmount",
 			"request": {
 				"method": "GET",
 				"header": [],

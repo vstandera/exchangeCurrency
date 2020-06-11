@@ -36,8 +36,9 @@ public class AfterBoot {
 
     private static String EXCHANGE= "/exchange";
 
-
-
+    /**
+     *  This method initialize the database after start application with the currency and currencyExchange
+     */
     @EventListener(ApplicationReadyEvent.class)
     public void initAfterStart(){
         currencyRepository.save(Currency.builder().country("Czech").currencyCode(CurrencyCode.CZK).description("Currency for Czech.").build());
@@ -59,12 +60,17 @@ public class AfterBoot {
 //        saveCurrencyExchangeDifferentCurrency(currencyRepository.findCurrencyByCurrencyCode(CurrencyCode.JPY),currencyRepository.findCurrencyByCurrencyCode(CurrencyCode.USD));
     }
 
+    /**
+     * Read from file currencyExchange data
+     * @param currencyFrom The currency from calculate
+     * @param currencyTo The currency to calculate
+     */
     private void saveCurrencyExchange(Currency currencyFrom, Currency currencyTo){
         try {
 
             File f = new File(getFilePath()+"/"+currencyFrom.getCurrencyCode().name() + "_TO_" + currencyTo.getCurrencyCode().name() + ".txt");
             BufferedReader b = new BufferedReader(new FileReader(f));
-            String readLine = "";
+            String readLine;
             MathContext mc = new MathContext(12, RoundingMode.HALF_UP);
             System.out.println("Reading file using Buffered Reader");
 
@@ -84,6 +90,11 @@ public class AfterBoot {
         }
     }
 
+    /**
+     * This method is only to migration propose to get new currency exchnage data
+     * @param currencyFrom The currency from calculate
+     * @param currencyTo The currency to calculate
+     */
     private void saveCurrencyExchangeDifferentCurrency(Currency currencyFrom, Currency currencyTo){
         try {
 
@@ -91,10 +102,10 @@ public class AfterBoot {
             File f2 = new File(getFilePath()+"/"+currencyTo.getCurrencyCode().name() + "_TO_" + CurrencyCode.CZK + ".txt");
             BufferedReader b = new BufferedReader(new FileReader(f));
             BufferedReader b2 = new BufferedReader(new FileReader(f2));
-            String readLine = "";
+            String readLine;
             MathContext mc = new MathContext(12, RoundingMode.HALF_UP);
             System.out.println("Reading file using Buffered Reader");
-            String readLine2="";
+            String readLine2;
             while ((readLine = b.readLine()) != null) {
                 readLine2 = b2.readLine();
                 String[] split = readLine.split("\\|");
@@ -111,7 +122,6 @@ public class AfterBoot {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-//        CurrencyExchange.builder().currencyFrom(currencyFrom).currencyTo(currencyTo).exchangeDate()
     }
 
     private String getFilePath() {
